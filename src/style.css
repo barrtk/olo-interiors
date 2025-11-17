@@ -380,9 +380,10 @@ a {
 
 .contact-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap-lg); max-width: 1000px; margin: 0 auto; }
 .contact-form { display: flex; flex-direction: column; gap: var(--gap-md); }
-.form-group label { font-weight: 600; }
+.form-group { display: flex; flex-direction: column; }
+.form-group label { font-weight: 600; display: block; margin-bottom: var(--gap-sm); }
 .required { color: var(--wood-brown); }
-.form-group input, .form-group textarea { padding: clamp(0.75rem, 2vw, 0.9375rem) clamp(0.9375rem, 2.5vw, 1.25rem); border: 2px solid #ddd; border-radius: 4px; font-family: inherit; transition: border-color 0.3s ease; }
+.form-group input, .form-group textarea { width: 100%; padding: clamp(0.75rem, 2vw, 0.9375rem) clamp(0.9375rem, 2.5vw, 1.25rem); border: 2px solid #ddd; border-radius: 4px; font-family: inherit; transition: border-color 0.3s ease; }
 .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--wood-brown); }
 
 .whatsapp-big .fa-whatsapp { font-size: clamp(36px, 8vw, 40px) !important; transform: translateY(-2px); }
