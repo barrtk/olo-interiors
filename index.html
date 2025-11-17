@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carpentry in Glasgow - Olo Interiors Kitchen & Floors">
+    <title>Olo Interiors | Kitchen & Floors</title>
+    <link rel="icon" href="images/logo-round.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+
+    <link rel="stylesheet" href="src/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Carpentry Glasgow Logo" class="logo-image">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero" aria-label="Go to home section">Home</a></li>
+                <li><a href="#about" aria-label="Go to about section">About</a></li>
+                <li><a href="#gallery" aria-label="Go to gallery section">Gallery</a></li>
+                <li><a href="#service-area" aria-label="Go to service area section">Service Area</a></li>
+                <li><a href="#contact" aria-label="Go to contact section">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Custom Furniture – Glasgow</h1>
+            <p class="hero-subtitle">Handcrafted with Passion, Tailored to Your Needs</p>
+            <a href="#contact" class="btn-primary" aria-label="Contact us for a free quote">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section section">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <p>
+                    Hi, my name is Oliwier, and I'm a passionate joiner with 12 years of hands-on experience crafting bespoke solid-wood furniture that stands the test of time. Based in Glasgow, I’m happy to take on projects both locally and further afield.
+
+                    I specialize in custom kitchens, wardrobes, shelving, and much more, with each piece carefully designed and built to match your exact vision. Woodworking isn’t just my trade—it’s my lifelong passion. I put my heart into every detail to ensure the end result is heirloom-quality furniture that will last for years to come.
+
+                    From elegant staircases to stunning floors, I take pride in transforming your ideas into functional, beautiful pieces of art. No project is too big or too small, and I’m dedicated to exceeding your expectations with every creation.
+
+                    If you're ready to bring your ideas to life, get in touch with me today for a no-obligation chat. I’d love to help turn your vision into reality.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section section">
+        <div class="container">
+            <h2 class="section-title">Portfolio</h2>
+            <div class="gallery-grid">
+                <figure class="gallery-item">
+                    <a href="images/photo1.jpg" data-lightbox="gallery" data-title="Oak Kitchen, 2024">
+                        <img src="images/photo1.jpg" alt="Custom oak kitchen with modern design" loading="lazy">
+                    </a>
+                    <figcaption>Oak Kitchen, 2024</figcaption>
+                </figure>
+                <figure class="gallery-item">
+                    <a href="images/photo2.jpg" data-lightbox="gallery" data-title="Walnut Wardrobe, 2023">
+                        <img src="images/photo2.jpg" alt="Handcrafted walnut wardrobe" loading="lazy">
+                    </a>
+                    <figcaption>Walnut Wardrobe, 2023</figcaption>
+                </figure>
+                <figure class="gallery-item">
+                    <a href="images/photo3.jpg" data-lightbox="gallery" data-title="Pine Bookshelf, 2024">
+                        <img src="images/photo3.jpg" alt="Custom pine bookshelf unit" loading="lazy">
+                    </a>
+                    <figcaption>Pine Bookshelf, 2024</figcaption>
+                </figure>
+                <figure class="gallery-item">
+                    <a href="images/photo4.jpg" data-lightbox="gallery" data-title="Oak Dining Table, 2023">
+                        <img src="images/photo4.jpg" alt="Solid oak dining table" loading="lazy">
+                    </a>
+                    <figcaption>Oak Dining Table, 2023</figcaption>
+                </figure>
+                <figure class="gallery-item">
+                    <a href="images/photo5.jpg" data-lightbox="gallery" data-title="Custom Shelving, 2024">
+                        <img src="images/photo5.jpg" alt="Custom wall shelving unit" loading="lazy">
+                    </a>
+                    <figcaption>Custom Shelving, 2024</figcaption>
+                </figure>
+                <figure class="gallery-item">
+                    <a href="images/photo6.jpg" data-lightbox="gallery" data-title="Ash Cabinet, 2023">
+                        <img src="images/photo6.jpg" alt="Handcrafted ash cabinet" loading="lazy">
+                    </a>
+                    <figcaption>Ash Cabinet, 2023</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Area Section -->
+    <section id="service-area" class="service-area-section section">
+        <div class="container">
+            <h2 class="section-title">Service Area</h2>
+            <div id="map" role="img" aria-label="Map showing service area around Glasgow"></div>
+            <p class="service-area-text">Based in Glasgow, our company primarily serves the local area but is always open to travelling further for the right project.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <form action="https://formspree.io/f/YOUR_ID" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name <span class="required" aria-label="required">*</span></label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <span class="required" aria-label="required">*</span></label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <span class="required" aria-label="required">*</span></label>
+                        <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send</button>
+                </form>
+
+                <div class="contact-info">
+                    <!-- <div class="contact-item">
+                        <h3>Email</h3>
+                        <a href="mailto:carpentry@example.com">carpentry@example.com</a>
+                    </div> -->
+                    <!-- ZAMIEŃ CAŁY BLOK "Phone / WhatsApp" W index.html NA TEN: -->
+                    <div class="contact-item">
+                        <h3>Phone / WhatsApp</h3>
+                        <a href="tel:+447482227641" class="contact-link-with-icon whatsapp-big">
+                            <i class="fab fa-whatsapp social-icon whatsapp"></i>
+                            <span>+44 7482 227641</span>
+                        </a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Social Media</h3>
+                    <!-- ZAMIEŃ CAŁY BLOK SOCIAL-LINKS W index.html NA TEN: -->
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/olointeriorsglasgow/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="instagram">
+                            <i class="fab fa-instagram social-icon instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/Olointeriors/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="facebook">
+                            <i class="fab fa-facebook-f social-icon facebook"></i>
+                        </a>
+                        <!-- ZAMIEŃ TĘ LINIĘ W SOCIAL-LINKS (w index.html): -->
+                        <a href="https://www.mybuilder.com/profile/oliwier_roszkowski" target="_blank" rel="noopener noreferrer" aria-label="MyBuilder">
+                            <span class="mybuilder-icon-wrapper">
+                                <i class="fa-solid fa-hammer mybuilder-hammer"></i>
+                            </span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Olo Interiors | Kitchen & Floors. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
