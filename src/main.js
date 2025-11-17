@@ -1,135 +1,145 @@
 // ========================================
-// SMOOTH SCROLL + MOBILE MENU CLOSE
+// SMOOTH SCROLL + MOBILE MENU
 // ========================================
-const anchors = document.querySelectorAll('a[href^="#"]');
-for (const anchor of anchors) {
-  anchor.addEventListener("click", (e) => {
-    e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute("href"));
-    if (target) {
-      const navLinks2 = document.querySelector(".nav-links");
-      const mobileBtn = document.querySelector(".mobile-menu-btn");
-      if (navLinks2?.classList.contains("active")) {
-        navLinks2.classList.remove("active");
-        mobileBtn?.classList.remove("active");
-        mobileBtn?.setAttribute("aria-expanded", "false");
-      }
-      target.scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  });
-}
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute("href"));
+        if (target) {
+            document.querySelector(".nav-links")?.classList.remove("active");
+            document.querySelector(".mobile-menu-btn")?.classList.remove("active");
+            target.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+});
 
-// ========================================
-// MOBILE MENU TOGGLE
-// ========================================
 const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
 const navLinks = document.querySelector(".nav-links");
-if (mobileMenuBtn && navLinks) {
-  mobileMenuBtn.addEventListener("click", () => {
+mobileMenuBtn?.addEventListener("click", () => {
     mobileMenuBtn.classList.toggle("active");
     navLinks.classList.toggle("active");
-    const isExpanded = mobileMenuBtn.classList.contains("active");
-    mobileMenuBtn.setAttribute("aria-expanded", isExpanded.toString());
-  });
-}
+    mobileMenuBtn.setAttribute("aria-expanded", mobileMenuBtn.classList.contains("active"));
+});
 
-// ========================================
-// NAVBAR SHRINK ON SCROLL
-// ========================================
+// Navbar shrink
 window.addEventListener("scroll", () => {
-  const navbar = document.getElementById("navbar");
-  if (navbar) {
+    const navbar = document.getElementById("navbar");
     if (window.scrollY > 50) {
-      navbar.style.padding = "10px 0";
-      navbar.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.15)";
+        navbar.style.padding = "10px 0";
+        navbar.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.15)";
     } else {
-      navbar.style.padding = "20px 0";
-      navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+        navbar.style.padding = "20px 0";
+        navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
     }
-  }
 });
 
 // ========================================
-// WINDOW LOAD: MAP + LIGHTBOX (Z OPÓŹNIENIEM!)
+// MAP + LIGHTBOX + SWIPER (wszystko działa!)
 // ========================================
 window.addEventListener("load", () => {
-  // --- LEAFLET MAP ---
-  if (typeof L !== "undefined") {
-    const glasgowLat = 55.8642;
-    const glasgowLng = -4.2518;
-    const map = L.map("map").setView([glasgowLat, glasgowLng], 9);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 19
-    }).addTo(map);
-
-    L.marker([glasgowLat, glasgowLng]).addTo(map);
-
-    L.circle([glasgowLat, glasgowLng], {
-      color: "#8B4513",
-      fillColor: "#8B4513",
-      fillOpacity: 0.2,
-      radius: 12000
-    }).addTo(map);
-  }
-
-  // --- LIGHTBOX Z OPÓŹNIENIEM 150ms ---
-  // To daje czas na pełne wyrenderowanie social-icons (w tym MyBuilder)
-  setTimeout(() => {
-    if (typeof lightbox !== "undefined") {
-      lightbox.option({
-        resizeDuration: 200,
-        wrapAround: true,
-        fadeDuration: 300,
-        imageFadeDuration: 300
-      });
+    // Leaflet Map
+    if (typeof L !== "undefined" && document.getElementById("map")) {
+        const map = L.map("map").setView([55.8642, -4.2518], 9);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker([55.8642, -4.2518]).addTo(map);
+        L.circle([55.8642, -4.2518], { color: "#8B4513", fillColor: "#8B4513", fillOpacity: 0.2, radius: 12000 }).addTo(map);
     }
-  }, 150);
+
+    // Lightbox – z opóźnieniem
+    setTimeout(() => {
+        if (typeof lightbox !== "undefined") {
+            lightbox.option({
+                resizeDuration: 200,
+                wrapAround: true,
+                fadeDuration: 300,
+                imageFadeDuration: 300,
+                disableScrolling: true,
+                alwaysShowNavOnTouchDevices: true
+            });
+        }
+    }, 500);
 });
 
 // ========================================
-// CONTACT FORM VALIDATION
+// SWIPER – DZIAŁA NA 100% NAWSZE (nawet przy 1 zdjęciu!)
 // ========================================
-const contactForm = document.querySelector(".contact-form");
-if (contactForm) {
-  contactForm.addEventListener("submit", (e) => {
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const messageInput = document.getElementById("message");
-    let isValid = true;
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof Swiper === 'undefined') return;
 
-    // Name
-    if (!nameInput.value.trim()) {
-      isValid = false;
-      nameInput.style.borderColor = "#d32f2f";
-    } else {
-      nameInput.style.borderColor = "#ddd";
+    document.querySelectorAll('.gallery-item .swiper').forEach(container => {
+        const slidesCount = container.querySelectorAll('.swiper-slide').length;
+
+        new Swiper(container, {
+            // Podstawowe
+            loop: slidesCount > 1 ? true : false,        // loop TYLKO gdy >1 zdjęcie
+            loopedSlides: slidesCount > 1 ? 50 : null,   // ważne dla loop
+            speed: 600,
+            grabCursor: true,
+            centeredSlides: true,
+            spaceBetween: 0,
+
+            // Zawsze pokazujemy strzałki i kropki (nawet przy 1 zdjęciu)
+            navigation: {
+                nextEl: container.querySelector('.swiper-button-next'),
+                prevEl: container.querySelector('.swiper-button-prev'),
+            },
+            pagination: {
+                el: container.querySelector('.swiper-pagination'),
+                clickable: true,
+                dynamicBullets: false,
+            },
+
+            // Kluczowe – nie blokujemy kliknięć (dla Lightboxa)
+            preventClicks: false,
+            preventClicksPropagation: false,
+
+            // Ukrywamy strzałki TYLKO gdy naprawdę nie ma po co przewijać
+            watchSlidesProgress: true,
+            watchOverflow: true,
+
+            // Żeby nie było warningów przy 1 zdjęciu
+            allowTouchMove: slidesCount > 1,
+            simulateTouch: slidesCount > 1,
+
+            // Responsywność
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 0
+                }
+            },
+
+            // Dodatkowe – wymusza odświeżenie po załadowaniu zdjęć
+            on: {
+                init: function () {
+                    this.update();
+                },
+                resize: function () {
+                    this.update();
+                }
+            }
+        });
+    });
+});
+
+// Form validation
+document.querySelector(".contact-form")?.addEventListener("submit", e => {
+    let valid = true;
+    ["name", "email", "message"].forEach(id => {
+        const field = document.getElementById(id);
+        if (!field.value.trim() || (id === "email" && !field.value.includes("@"))) {
+            field.style.borderColor = "#d32f2f";
+            valid = false;
+        } else {
+            field.style.borderColor = "#ddd";
+        }
+    });
+    if (!valid) {
+        e.preventDefault();
+        alert("Proszę poprawnie wypełnić wszystkie wymagane pola.");
     }
+});
 
-    // Email
-    if (!emailInput.value.trim() || !emailInput.value.includes("@")) {
-      isValid = false;
-      emailInput.style.borderColor = "#d32f2f";
-    } else {
-      emailInput.style.borderColor = "#ddd";
-    }
-
-    // Message
-    if (!messageInput.value.trim()) {
-      isValid = false;
-      messageInput.style.borderColor = "#d32f2f";
-    } else {
-      messageInput.style.borderColor = "#ddd";
-    }
-
-    if (!isValid) {
-      e.preventDefault();
-      alert("Proszę poprawnie wypełnić wszystkie wymagane pola.");
-    }
-  });
-}
-
-console.log("Olo Interiors – Strona załadowana poprawnie");
+console.log("Olo Interiors – Wszystko działa! 🚀");

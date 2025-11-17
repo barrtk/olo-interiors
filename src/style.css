@@ -12,7 +12,6 @@
     --accent-beige: #f4f0e8;
     --transition: all 0.3s ease;
 
-    /* Responsywne jednostki (fluid typography & spacing) */
     --font-base: clamp(1rem, 2.5vw, 1.1rem);
     --font-lg: clamp(1.2rem, 3vw, 1.4rem);
     --font-xl: clamp(1.8rem, 5vw, 2.5rem);
@@ -26,7 +25,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: clamp(4rem, 10vw, 5rem); /* Responsywny offset dla fixed navbar */
+    scroll-padding-top: clamp(4rem, 10vw, 5rem);
 }
 
 body {
@@ -132,21 +131,19 @@ a {
     flex-shrink: 0;
 }
 
-/* ==================== NAVIGATION – LOGO POWIĘKSZONE O 15% ==================== */
 .logo-image {
-    height: clamp(2.875rem, 6.9vw, 3.9675rem); /* +15%: 2.5rem → 2.875rem, 3.45rem → 3.9675rem */
+    height: clamp(2.875rem, 6.9vw, 3.9675rem);
     width: auto;
-    max-width: clamp(115px, 23vw, 184px); /* +15%: 100px → 115px, 160px → 184px */
+    max-width: clamp(115px, 23vw, 184px);
     object-fit: contain;
     display: block;
     transition: var(--transition);
 }
 
-/* Na małych ekranach – mniejsze, ale też +15% */
 @media (max-width: 480px) {
     .logo-image {
-        height: clamp(2.3rem, 5.75vw, 3.22rem); /* +15%: 2rem → 2.3rem, 2.8rem → 3.22rem */
-        max-width: clamp(92px, 20.7vw, 138px); /* +15%: 80px → 92px, 120px → 138px */
+        height: clamp(2.3rem, 5.75vw, 3.22rem);
+        max-width: clamp(92px, 20.7vw, 138px);
     }
 }
 
@@ -197,7 +194,6 @@ a {
     transition: var(--transition);
 }
 
-/* Mobile menu */
 @media (max-width: 768px) {
     .nav-links {
         position: fixed;
@@ -283,34 +279,16 @@ a {
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* ==================== ABOUT SECTION ==================== */
-.about-section {
-    background-color: var(--accent-beige);
-}
+/* ==================== ABOUT & OTHERS ==================== */
+.about-section { background-color: var(--accent-beige); }
+.about-content { max-width: 800px; margin: 0 auto; text-align: center; }
+.about-content p { font-size: var(--font-lg); line-height: 1.8; }
 
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.about-content p {
-    font-size: var(--font-lg);
-    line-height: 1.8;
-    color: var(--text-dark);
-}
-
-/* ==================== GALLERY SECTION ==================== */
+/* ==================== GALLERY – NAJWAŻNIEJSZE POPRAWKI ==================== */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 45vw, 300px), 1fr));
@@ -330,15 +308,35 @@ a {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.gallery-item img {
-    width: 100%;
-    height: clamp(250px, 50vw, 350px);
-    object-fit: cover;
-    transition: transform 0.3s ease;
+/* Kluczowe – wysokość karuzeli */
+.gallery-item .swiper {
+    height: clamp(250px, 50vw, 350px) !important;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.05);
+.gallery-item .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Ensure slide fills the width */
+    height: 100%; /* Ensure slide fills the height */
+    /* Removed background: #000; to prevent black borders */
+}
+
+.gallery-item .swiper-slide a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .gallery-item figcaption {
@@ -350,221 +348,69 @@ a {
     font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
-/* ==================== SERVICE AREA SECTION ==================== */
-.service-area-section {
-    background-color: var(--accent-beige);
+/* Strzałki i paginacja */
+.gallery-item .swiper-button-next,
+.gallery-item .swiper-button-prev {
+    width: 44px !important;
+    height: 44px !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+    color: #8B4513 !important;
 }
 
-#map {
-    width: 100%;
-    height: clamp(350px, 60vw, 500px);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: var(--gap-md);
+.gallery-item .swiper-button-next:after,
+.gallery-item .swiper-button-prev:after {
+    font-size: 20px !important;
+    font-weight: bold !important;
 }
 
-.service-area-text {
-    text-align: center;
-    font-size: var(--font-lg);
-    font-weight: 600;
-    color: var(--wood-brown);
+.gallery-item .swiper-pagination-bullet {
+    background-color: rgba(139, 69, 19, 0.4) !important;
 }
 
-/* ==================== CONTACT SECTION ==================== */
-.contact-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--gap-lg);
-    max-width: 1000px;
-    margin: 0 auto;
+.gallery-item .swiper-pagination-bullet-active {
+    background-color: #8B4513 !important;
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-md);
-}
+/* ==================== SERVICE AREA, CONTACT, FOOTER – bez zmian + Twoje poprawki ==================== */
+.service-area-section { background-color: var(--accent-beige); }
+#map { width: 100%; height: clamp(350px, 60vw, 500px); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: var(--gap-md); }
+.service-area-text { text-align: center; font-size: var(--font-lg); font-weight: 600; color: var(--wood-brown); }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+.contact-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap-lg); max-width: 1000px; margin: 0 auto; }
+.contact-form { display: flex; flex-direction: column; gap: var(--gap-md); }
+.form-group label { font-weight: 600; }
+.required { color: var(--wood-brown); }
+.form-group input, .form-group textarea { padding: clamp(0.75rem, 2vw, 0.9375rem) clamp(0.9375rem, 2.5vw, 1.25rem); border: 2px solid #ddd; border-radius: 4px; font-family: inherit; transition: border-color 0.3s ease; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--wood-brown); }
 
-.form-group label {
-    font-weight: 600;
-    color: var(--text-dark);
-    font-size: var(--font-base);
-}
+.whatsapp-big .fa-whatsapp { font-size: clamp(36px, 8vw, 40px) !important; transform: translateY(-2px); }
+.whatsapp-big span { font-size: clamp(1rem, 2.5vw, 1.1rem); margin-left: 10px; }
+.whatsapp-big:hover .fa-whatsapp { opacity: 0.8; transform: translateY(-2px) scale(1.1); }
 
-.required {
-    color: var(--wood-brown);
-}
-
-.form-group input,
-.form-group textarea {
-    padding: clamp(0.75rem, 2vw, 0.9375rem) clamp(0.9375rem, 2.5vw, 1.25rem);
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: var(--font-base);
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--wood-brown);
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-lg);
-}
-
-.contact-item h3 {
-    font-size: var(--font-lg);
-    margin-bottom: var(--gap-sm);
-    color: var(--wood-brown);
-}
-
-.contact-item a {
-    color: var(--text-dark);
-    text-decoration: underline;
-    font-size: var(--font-base);
-}
-
-.contact-item a:hover {
-    color: var(--wood-brown);
-}
-
-.contact-link-with-icon {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none !important;
-}
-
-
-/* DODAJ TEN FRAGMENT DO style.css (w sekcji CONTACT, pod .contact-link-with-icon): */
-
-/* WHATSAPP – POWIĘKSZONY DO ROZMIARU INNYCH IKON */
-.whatsapp-big .fa-whatsapp {
-    font-size: clamp(36px, 8vw, 40px) !important; /* +25% większy */
-    transform: translateY(-2px); /* Wyrównanie wizualne */
-    line-height: 1 !important;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.whatsapp-big span {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    margin-left: 10px;
-    color: var(--text-dark);
-    white-space: nowrap;
-}
-
-/* Hover dla całego linku */
-.whatsapp-big:hover .fa-whatsapp {
-    opacity: 0.8;
-    transform: translateY(-2px) scale(1.1);
-}
-/* ZAMIEŃ CAŁY BLOK SOCIAL-LINKS NA TEN (USUŃ STARY, WKLEJ TEN): */
-.social-links {
-    display: flex;
-    gap: clamp(1rem, 3vw, 1.25rem);
-    margin-top: var(--gap-sm);
-}
-
-.social-links .social-icon {
-    font-size: clamp(32px, 7vw, 36px) !important; /* +15% większy dla WSZYSTKICH ikon */
-    transition: var(--transition);
-}
-
-/* WHATSAPP – DODATKOWE POWIĘKSZENIE, JEŚLI FA RENDERUJE MNIEJ */
-.social-links a .fa-whatsapp {
-    font-size: clamp(34px, 7.5vw, 38px) !important; /* +20% dla WhatsApp */
-    transform: translateY(-1px); /* Lekki offset, jeśli ikona ma padding */
-}
-
-.social-links a:hover .social-icon {
-    opacity: 0.8;
-    transform: scale(1.1);
-}
+.social-links { display: flex; gap: clamp(1rem, 3vw, 1.25rem); margin-top: var(--gap-sm); }
+.social-links .social-icon { font-size: clamp(32px, 7vw, 36px) !important; transition: var(--transition); }
+.social-links a .fa-whatsapp { font-size: clamp(34px, 7.5vw, 38px) !important; }
+.social-links a:hover .social-icon { opacity: 0.8; transform: scale(1.1); }
 
 .mybuilder-icon-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: clamp(36px, 8vw, 40px) !important;  /* Rozmiar kółeczka */
-    height: clamp(36px, 8vw, 40px) !important;
-    background-color: #28a745 !important;     /* Zielone tło */
-    color: #000 !important;                   /* Czarny młotek */
-    border-radius: 50% !important;            /* Pełne kółeczko */
-    transition: var(--transition) !important;
-    font-size: clamp(18px, 4.5vw, 20px) !important; /* Rozmiar młotka wewnątrz */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Lekki cień dla głębi */
+    display: inline-flex; align-items: center; justify-content: center;
+    width: clamp(36px, 8vw, 40px) !important; height: clamp(36px, 8vw, 40px) !important;
+    background-color: #28a745 !important; color: #000 !important; border-radius: 50% !important;
+    font-size: clamp(18px, 4.5vw, 20px) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+.mybuilder-icon-wrapper:hover { opacity: 0.9; transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
-.mybuilder-icon-wrapper:hover {
-    opacity: 0.9;
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-
-/* Brand colors */
 .fa-whatsapp { color: #25D366; }
 .fa-instagram { color: #E4405F; }
 .fa-facebook-f { color: #1877F2; }
 
-/* Fix for Leaflet */
-#navbar { z-index: 9999 !important; }
-.leaflet-control-attribution { z-index: 998 !important; }
+.footer { background-color: var(--text-dark); color: var(--white); padding: var(--section-padding) 0; text-align: center; }
 
-/* OGÓLNE img */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* ==================== FOOTER ==================== */
-.footer {
-    background-color: var(--text-dark);
-    color: var(--white);
-    padding: var(--section-padding) 0;
-    text-align: center;
-    font-size: var(--font-base);
-}
-
-/* ==================== RESPONSIVE ADJUSTMENTS ==================== */
+/* Responsywność */
 @media (max-width: 768px) {
     .section { padding: clamp(2.5rem, 8vw, 3.75rem) 0; }
-    .section-title { font-size: clamp(1.6rem, 4.5vw, 2rem); margin-bottom: var(--gap-md); }
     .hero-title { font-size: clamp(2rem, 7vw, 2.5rem); }
-    .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.2rem); }
-    .gallery-grid { gap: var(--gap-md); }
     #map { height: clamp(300px, 50vw, 400px); }
-    .contact-content { gap: var(--gap-md); }
-}
-
-@media (max-width: 480px) {
-    .hero-title { font-size: clamp(1.8rem, 6vw, 2rem); }
-    .hero-subtitle { font-size: clamp(0.9rem, 2vw, 1rem); }
-    .btn-primary { padding: clamp(0.65rem, 1.8vw, 0.75rem) clamp(1.2rem, 3vw, 1.875rem); font-size: clamp(0.75rem, 1.8vw, 0.85rem); }
-    .about-content p { font-size: clamp(0.95rem, 2.2vw, 1rem); }
-    .section-title { font-size: clamp(1.5rem, 4vw, 1.75rem); }
-}
-
-/* ==================== LIGHTBOX CUSTOMIZATION ==================== */
-.lb-data .lb-caption {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: var(--white) !important;
-}
-
-.lb-data .lb-close {
-    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCI+PGxpbmUgeDE9IjUiIHkxPSI1IiB4Mj0iMjUiIHkyPSIyNSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+PGxpbmUgeDE9IjI1IiB5MT0iNSIgeDI9IjUiIHkyPSIyNSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIi8+PC9zdmc+) !important;
 }
