@@ -514,9 +514,10 @@ a {
     transform: translateX(-50%);
     background-color: var(--text-dark); /* Dark background for readability */
     color: var(--white);
-    padding: 8px 12px;
+    padding: 6px 18px; /* Less vertical, more horizontal padding */
+    max-width: 250px; /* Increased max-width */
     border-radius: 5px;
-    white-space: nowrap;
+    white-space: pre-line;
     font-size: 0.85em;
     opacity: 0;
     visibility: hidden;
