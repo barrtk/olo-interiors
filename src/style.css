@@ -515,7 +515,8 @@ a {
     background-color: var(--text-dark); /* Dark background for readability */
     color: var(--white);
     padding: 6px 18px; /* Less vertical, more horizontal padding */
-    max-width: 250px; /* Increased max-width */
+    max-width: none;
+    width:320px; /* Increased max-width */
     border-radius: 5px;
     white-space: pre-line;
     font-size: 0.85em;
