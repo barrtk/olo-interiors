@@ -124,21 +124,66 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Form validation
-document.querySelector(".contact-form")?.addEventListener("submit", e => {
+// Form validation and WhatsApp message sending
+document.querySelector("#contactForm")?.addEventListener("submit", e => {
+    e.preventDefault(); // Prevent default form submission
+
     let valid = true;
-    ["name", "email", "message"].forEach(id => {
-        const field = document.getElementById(id);
-        if (!field.value.trim() || (id === "email" && !field.value.includes("@"))) {
-            field.style.borderColor = "#d32f2f";
-            valid = false;
-        } else {
-            field.style.borderColor = "#ddd";
+    const nameField = document.getElementById("name");
+    const emailField = document.getElementById("email");
+    const messageField = document.getElementById("message");
+    const phoneField = document.getElementById("phone"); // Get phone field
+
+    // Basic validation
+    if (!nameField.value.trim()) {
+        nameField.style.borderColor = "#d32f2f";
+        valid = false;
+    } else {
+        nameField.style.borderColor = "#ddd";
+    }
+
+    if (!emailField.value.trim() || !emailField.value.includes("@")) {
+        emailField.style.borderColor = "#d32f2f";
+        valid = false;
+    } else {
+        emailField.style.borderColor = "#ddd";
+    }
+
+    if (!messageField.value.trim()) {
+        messageField.style.borderColor = "#d32f2f";
+        valid = false;
+    } else {
+        messageField.style.borderColor = "#ddd";
+    }
+
+    if (valid) {
+        const form = e.target;
+        const whatsappNumber = form.dataset.whatsappNumber;
+        const name = nameField.value.trim();
+        const email = emailField.value.trim();
+        const phone = phoneField.value.trim(); // Get phone value
+        const message = messageField.value.trim();
+
+        let whatsappMessage = `New message from website:\n\nName: ${name}\nEmail: ${email}`;
+        if (phone) {
+            whatsappMessage += `\nPhone: ${phone}`;
         }
-    });
-    if (!valid) {
-        e.preventDefault();
-        alert("Proszę poprawnie wypełnić wszystkie wymagane pola.");
+        whatsappMessage += `\n\nMessage: ${message}`;
+
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        window.open(whatsappUrl, '_blank');
+
+        // Clear form fields after submission
+        nameField.value = "";
+        emailField.value = "";
+        phoneField.value = "";
+        messageField.value = "";
+
+        alert("Your message has been prepared in WhatsApp. Please send it.");
+    } else {
+        alert("Please fill in all required fields correctly.");
     }
 });
 
